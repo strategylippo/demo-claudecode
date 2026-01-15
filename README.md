@@ -1,73 +1,131 @@
-# React + TypeScript + Vite
+# Demo Claude Code
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A demonstration project showcasing Claude Code configurations including custom agents, commands, skills, hooks, and plugins.
 
-Currently, two official plugins are available:
+## Expense Tracker Application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project includes a complete expense tracker application built with:
+- React 19 + TypeScript
+- Vite 7
+- TailwindCSS 4
+- Chart.js for visualizations
+- jsPDF for PDF export
 
-## React Compiler
+### Running the App
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd expense-tracker
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running Tests
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd expense-tracker
+npm run test
 ```
+
+---
+
+## Claude Code Setup
+
+### Initialize Claude Code
+
+First, initialize Claude Code in your project:
+
+```bash
+/init
+```
+
+### Add Plugin Marketplace
+
+Clone and add the agents marketplace:
+
+```bash
+git clone https://github.com/wshobson/agents
+/marketplace add ./agents
+```
+
+### Install Plugins
+
+Install the recommended plugins from the marketplace:
+
+#### Essential
+```bash
+/plugin install javascript-typescript
+/plugin install frontend-mobile-development
+```
+
+#### Data Handling
+```bash
+/plugin install data-validation-suite
+/plugin install business-analytics
+```
+
+#### Quality
+```bash
+/plugin install unit-testing
+/plugin install code-review-ai
+```
+
+#### Security & Accessibility
+```bash
+/plugin install frontend-mobile-security
+/plugin install accessibility-compliance
+```
+
+---
+
+## Project Structure
+
+```
+.claude/
+├── agents/                    # Custom AI agents
+│   ├── ui-ux-consultant.md
+│   ├── typescript-best-practices.md
+│   ├── unit-test-creator.md
+│   └── business-graphic-designer.md
+├── commands/                  # Custom slash commands
+│   ├── add-category.md
+│   ├── add-component.md
+│   └── check-quality.md
+├── skills/                    # Reusable skills
+│   ├── add-category/
+│   ├── add-component/
+│   └── check-quality/
+└── settings.json              # Hooks configuration
+
+expense-tracker/               # Demo application
+├── src/
+│   ├── components/
+│   ├── hooks/
+│   ├── types/
+│   └── utils/
+└── tests/
+```
+
+## Custom Agents
+
+| Agent | Description |
+|-------|-------------|
+| `ui-ux-consultant` | Expert UI/UX design guidance using established principles |
+| `typescript-best-practices` | TypeScript code review and best practices |
+| `unit-test-creator` | Automated unit test generation |
+| `business-graphic-designer` | Business graphics and visualization design |
+
+## Custom Commands
+
+| Command | Description |
+|---------|-------------|
+| `/add-category` | Add a new expense category |
+| `/add-component` | Create a new React component |
+| `/check-quality` | Run code quality checks |
+
+## Hooks
+
+The project includes pre-configured hooks for TypeScript/TSX files:
+
+- **PreToolUse (Edit)**: Runs ESLint before editing files
+- **PostToolUse (Edit)**: Formats with Prettier and runs TypeScript check
+- **PostToolUse (Write)**: Formats new files with Prettier
